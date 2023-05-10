@@ -1,30 +1,15 @@
-import { useState } from "react";
 import Table from "./Table";
+
+import useSort from "../hooks/use-sort";
 
 import { GoArrowSmallUp, GoArrowSmallDown } from "react-icons/go";
 
 const SortableTable = (props) => {
-  const [sortOrder, setSortOrder] = useState(null);
-  const [sortBy, setSortBy] = useState(null);
   const { config, data } = props;
-
-  const handleClick = (label) => {
-    if ((sortBy !== null) & (sortBy !== label)) {
-      setSortOrder("asc");
-      setSortBy(label);
-      return;
-    }
-    if (!sortOrder) {
-      setSortOrder("asc");
-      setSortBy(label);
-    } else if (sortOrder === "asc") {
-      setSortOrder("desc");
-      setSortBy(label);
-    } else {
-      setSortOrder(null);
-      setSortBy(null);
-    }
-  };
+  const { setSortColumn, sortedData, sortBy, sortOrder } = useSort(
+    data,
+    config
+  );
 
   const updatedConfig = config.map((column) => {
     if (!column.sortValue) {
@@ -36,7 +21,7 @@ const SortableTable = (props) => {
       header: () => (
         <div
           className="flex items-center justify-center cursor-pointer hover:bg-slate-700"
-          onClick={() => handleClick(column.label)}
+          onClick={() => setSortColumn(column.label)}
         >
           {getIcons(column.label, sortBy, sortOrder)}
           {column.label}
@@ -44,27 +29,6 @@ const SortableTable = (props) => {
       ),
     };
   });
-
-  // only sort data if sortorder & sortby are not null
-  // make a copy of the "data" prop
-  // find the correct sortvalue function and use it for sorting
-
-  let sortedData = data;
-  if (sortOrder && sortBy) {
-    const { sortValue } = config.find((column) => column.label === sortBy);
-    sortedData = [...data].sort((a, b) => {
-      const valueA = sortValue(a);
-      const valueB = sortValue(b);
-
-      const reverseOrder = sortOrder === "asc" ? 1 : -1;
-
-      if (typeof valueA === "string") {
-        return valueA.localeCompare(valueB) * reverseOrder;
-      } else {
-        return (valueA - valueB) * reverseOrder;
-      }
-    });
-  }
 
   return (
     <div>

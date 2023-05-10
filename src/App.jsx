@@ -11,6 +11,8 @@ import AccordionPage from "./pages/AccordionPage";
 import DropdownPage from "./pages/DropdownPage";
 import ModalPage from "./pages/ModalPage";
 import TablePage from "./pages/TablePage";
+import CounterPage from "./pages/CounterPage";
+import CounterPage2 from "./pages/CounterPage2";
 
 function App() {
   return (
@@ -31,6 +33,12 @@ function App() {
         </Route>
         <Route path="/table">
           <TablePage />
+        </Route>
+        <Route path="/counter">
+          <CounterPage />
+        </Route>
+        <Route path="/counter2">
+          <CounterPage2 />
         </Route>
       </div>
     </div>

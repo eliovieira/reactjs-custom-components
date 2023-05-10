@@ -47,7 +47,11 @@ const TablePage = () => {
   //     { name: "Car", price: 7000, discount: 0.15, img: "car.png" },
   //     { name: "Boat", price: 35000, discount: 0.02, img: "boat.png" },
   //   ];
-  return <SortableTable data={data} config={config} keyFn={keyFn} />;
+  return (
+    <>
+      <SortableTable data={data} config={config} keyFn={keyFn} />
+    </>
+  );
 };
 
 export default TablePage;

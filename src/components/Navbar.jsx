@@ -22,6 +22,14 @@ const Navbar = () => {
       label: "Table",
       path: "/table",
     },
+    {
+      label: "Counter",
+      path: "/counter",
+    },
+    {
+      label: "Counter2",
+      path: "/counter2",
+    },
   ];
   return (
     <nav className="flex flex-col gap-10 sticky top-0 items-start ">
