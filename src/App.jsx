@@ -38,7 +38,7 @@ function App() {
           <CounterPage />
         </Route>
         <Route path="/counter2">
-          <CounterPage2 />
+          <CounterPage2 initialCount={10} />
         </Route>
       </div>
     </div>
